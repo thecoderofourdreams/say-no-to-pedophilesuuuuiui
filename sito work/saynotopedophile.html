@@ -3,183 +3,558 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Say No to Pedophiles</title>
+    <title>SafeNet International | Volunteer Network</title>
     <style>
-        /* Basic styling for the entire site */
-        body {
-            font-family: 'Times New Roman', Times, serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f7f7f7;
-            color: #333;
-        }
-        header {
-            background-color: #333;
-            padding: 10px;
-            text-align: center;
-            color: #ffffff;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.2em;
+        :root {
+            --primary: #e74c3c;
+            --secondary: #3498db;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #f39c12;
         }
         
-        /* Styling for the homepage section with the background image */
-        .home-section {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--dark);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        section {
+            margin: 4rem 0;
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
             position: relative;
-            height: 100vh;
-            background: url("https://i1.wp.com/opiniojuris.org/wp-content/uploads/Justice_GettyImages-1140705087.jpg?fit=2246%2C1335") center/cover no-repeat;
+            padding-bottom: 0.5rem;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+        }
+        
+        /* Volunteer Section */
+        .volunteer-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .volunteer-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .volunteer-card h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+        }
+        
+        /* Dashboard */
+        .dashboard {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background-color: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-card p {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        /* Resource Library */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .resource-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .resource-img {
+            height: 150px;
+            background-color: var(--secondary);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #ffffff;
-        }
-        .home-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-        }
-        .home-content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            max-width: 700px;
-            padding: 20px;
-        }
-        .home-content h1 {
-            font-size: 3em;
-            margin: 0;
-        }
-        .home-content p {
-            font-size: 1.2em;
-            color: #ddd;
+            color: white;
+            font-size: 2rem;
         }
         
-        /* Standard styling for other sections */
-        .section {
-            padding: 60px 20px;
-            text-align: center;
-            background-color: #ffffff;
-            color: #333;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            margin: 20px 0;
+        .resource-content {
+            padding: 1.5rem;
         }
-        h2 {
-            font-size: 2em;
-            color: #333;
-            margin-bottom: 10px;
+        
+        .resource-content h3 {
+            margin-bottom: 0.5rem;
         }
-        p {
-            font-size: 1.1em;
-            color: #555;
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
         }
-
-        /* Form styling for Get Help section */
-        .form-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 600px;
+        
+        .footer-container {
+            max-width: 1200px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
         }
-        .form-container input, .form-container textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1em;
+        
+        .footer-col h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
         }
-        .form-container button {
-            padding: 10px 20px;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            font-size: 1em;
-            cursor: pointer;
+        
+        .footer-col ul {
+            list-style: none;
         }
-        .form-container button:hover {
-            background-color: #555;
+        
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-col ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+            }
+            
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .volunteer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
 <body>
-
-    <!-- Header and Navigation -->
     <header>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#mission">Our Mission</a>
-            <a href="#information">Essential Information</a>
-            <a href="#gethelp">Get Help</a>
-            <a href="#contact">Contact Us</a>
-        </nav>
+        <div class="header-container">
+            <div class="logo">SafeNet <span>International</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#volunteer">Volunteer</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <!-- Home Section with Background Image -->
-    <section id="home" class="home-section">
-        <div class="home-overlay"></div>
-        <div class="home-content">
-            <h1>Welcome to Say No to Pedophiles</h1>
-            <p>
-                Our mission is to protect the vulnerable and work for a safer world. We collaborate closely with law enforcement and provide comprehensive support to help identify and respond to suspicious online activities. Join us as we advocate for safe spaces and stand as a united front against child exploitation.
-            </p>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Join the Fight Against Online Exploitation</h1>
+            <p>SafeNet International is a global volunteer network dedicated to protecting children in the digital age. Join us to make a difference.</p>
+            <div>
+                <a href="#volunteer" class="btn">Become a Volunteer</a>
+                <a href="#resources" class="btn btn-outline">Explore Resources</a>
+            </div>
         </div>
     </section>
 
-    <!-- Our Mission Section -->
-    <section id="mission" class="section">
-        <h2>Our Mission</h2>
-        <p>
-            Say No to Pedophiles is committed to defending the rights and dignity of children in the digital world. Our mission is to proactively combat child exploitation by raising awareness, providing resources, and supporting families in recognizing and responding to online threats. Through education, vigilance, and strong legal partnerships, we strive to create a world where every child can safely explore, learn, and grow without the risk of abuse.
-        </p>
-        <p>
-            Our approach is rooted in compassion, legality, and a deep understanding of digital behavior. We employ cutting-edge technology and partner with law enforcement agencies to track and expose potential threats, operating within a strict ethical framework that respects privacy while promoting safety.
-        </p>
-    </section>
+    <div class="container">
+        <!-- Volunteer Section -->
+        <section id="volunteer">
+            <h2>Become a Verified Volunteer</h2>
+            <p>All applicants complete background checks and training before accessing our systems.</p>
+            
+            <div class="volunteer-container">
+                <div class="volunteer-card">
+                    <h3>Application Form</h3>
+                    <form id="volunteerForm">
+                        <div class="form-group">
+                            <label for="volunteerName">Full Legal Name</label>
+                            <input type="text" id="volunteerName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="volunteerEmail">Email Address</label>
+                            <input type="email" id="volunteerEmail" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="volunteerCountry">Country of Residence</label>
+                            <input type="text" id="volunteerCountry" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="volunteerSkills">Relevant Skills/Experience</label>
+                            <textarea id="volunteerSkills" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="volunteerCommitment">Weekly Availability (hours)</label>
+                            <select id="volunteerCommitment" required>
+                                <option value="">Select...</option>
+                                <option value="5">5-10 hours</option>
+                                <option value="10">10-20 hours</option>
+                                <option value="20">20+ hours</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="volunteerAgreement" required>
+                                I agree to background checks and training requirements
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn">Apply to Volunteer</button>
+                    </form>
+                </div>
+                
+                <div class="volunteer-card">
+                    <h3>What We Offer</h3>
+                    <ul style="list-style-position: inside; margin-bottom: 1rem;">
+                        <li>Comprehensive training program</li>
+                        <li>Access to our resource library</li>
+                        <li>Global volunteer network</li>
+                        <li>Ongoing support and mentorship</li>
+                    </ul>
+                    <h4 style="margin-top: 1.5rem; color: var(--dark);">Requirements</h4>
+                    <ul style="list-style-position: inside; margin-top: 0.5rem;">
+                        <li>Pass background check</li>
+                        <li>Complete 40-hour training</li>
+                        <li>Commit to 5+ hours/week</li>
+                        <li>Follow strict ethical guidelines</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-    <!-- Essential Information Section -->
-    <section id="information" class="section">
-        <h2>Essential Information</h2>
-        <p>
-            As technology evolves, so do the risks that children face online. Here at Say No to Pedophiles, we are dedicated to providing resources and support to parents, guardians, and community members, ensuring they have the tools to safeguard young minds against online predators. We actively support the enforcement of child protection laws, helping to close loopholes and ensure that the safety of children remains a top priority in the digital age.
-        </p>
-        <p>
-            **Legal Foundations**: We operate within the legal frameworks provided by Articles on Child Protection, including regulations that allow for online monitoring in compliance with safeguarding policies. Our approach is based on ethics and respect for privacy, only targeting predatory behaviors with the intent to protect.
-        </p>
-    </section>
+        <!-- Resources Section -->
+        <section id="resources">
+            <h2>Volunteer Resource Library</h2>
+            <p>Access our training materials, operational guides, and legal resources.</p>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-img">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Training Manual</h3>
+                        <p>Complete guide to our volunteer training program.</p>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-img">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Global Protocols</h3>
+                        <p>Operational guidelines for different regions.</p>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-img">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Legal Resources</h3>
+                        <p>Country-specific legal frameworks and reporting procedures.</p>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-img">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3>Safety Toolkit</h3>
+                        <p>Best practices for secure online operations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- Get Help Section with Form -->
-    <section id="gethelp" class="section">
-        <h2>Get Help</h2>
-        <p>
-            If you suspect any online behavior that could be a risk to a child or need assistance, please fill out the form below. Our dedicated team will review your submission and contact you as soon as possible to address your concerns and provide guidance.
-        </p>
-        <div class="form-container">
-            <form action="mailto:whitehat.saynotopedophiles@gmail.com" method="post" enctype="text/plain">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-                <textarea name="message" rows="5" placeholder="Describe the issue or report" required></textarea>
-                <button type="submit">Send</button>
-            </form>
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Contact Our Volunteer Team</h2>
+            <p>For inquiries or additional information, please contact us at:</p>
+            <div style="margin-top: 1rem;">
+                <p><strong>Volunteer Coordination:</strong> whitehat.saynotopedophiles@gmail.com</p>
+                <p><strong>Training Support:</strong> whitehat.saynotopedophiles@gmail.com</p>
+                <p><strong>Legal Team:</strong> whitehat.saynotopedophiles@gmail.com</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>SafeNet International</h3>
+                <p>A global volunteer network protecting children in digital spaces through education, monitoring, and reporting.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#volunteer">Volunteer</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Contact Coordinators</h3>
+                <ul>
+                    <li>Volunteer Coordination: whitehat.saynotopedophiles@gmail.com</li>
+                    <li>Training Support: whitehat.saynotopedophiles@gmail.com</li>
+                    <li>Legal Team: whitehat.saynotopedophiles@gmail.com</li>
+                </ul>
+            </div>
         </div>
-    </section>
+        
+        <div class="copyright">
+            <p>&copy; 2023 SafeNet International Volunteer Network. All rights reserved.</p>
+            <p><small>This is a demonstration system. In emergencies, contact local law enforcement immediately.</small></p>
+        </div>
+    </footer>
 
-    <!-- Contact Us Section -->
-    <section id="contact" class="section">
-        <h2>Contact Us</h2>
-        <p>
-            For further information or inquiries, please contact us at the following emails:<br>
-            <strong>Director:</strong> whitehat.saynotopedophiles@gmail.com<br>
-            <strong>Communications & Operations Manager:</strong> blackhat.saynotopedophiles@gmail.com
-        </p>
-    </section>
-
+    <script>
+        // Volunteer Form Submission
+        document.getElementById('volunteerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your application! Our team will contact you shortly.');
+            this.reset();
+        });
+    </script>
 </body>
 </html>
